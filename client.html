@@ -28,8 +28,9 @@
             //send this msg to server emit
             socket.emit("chatMessage", msg); //custom event name, with direct msg sent
             ip.value = "";
-        })
+        });
 
+        //recieved from backend to Put on the Screen
         socket.on('broadcastMsg', (msg) => {
             console.log(msg);
             const messages = document.getElementById("messages");

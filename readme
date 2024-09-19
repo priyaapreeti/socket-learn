@@ -1,0 +1,24 @@
+This is socket.io notes: 
+so we use socket programming to implement multiple connections with the single server, in real time we make use of this in:
+-chat applications
+-sending notifications
+-real time tracking of two people on a doc 
+
+socket programming is based on event driven programming
+
+server is an object from socket.io
+
+we create an io object, which takes parameters of the created http server and optional cors methods, 
+
+io has two methods, on and emit
+it recieves an event with "on"
+and it sends through "emit"
+
+creating the client event from frontend, we need to make use of cdn link of socket
+and here we create a socket variable that connects with the backend socket's URL.
+now we send the event "connect" which validdates that connection is established.
+
+io.on sends an event-> "connection", which client recieves again with the same event name.
+
+from frontend basic-> an event is gonna be emitted as "chatMessage" here, which will be recieved by backend with the same event name.
+
