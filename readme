@@ -11,8 +11,8 @@ server is an object from socket.io
 we create an io object, which takes parameters of the created http server and optional cors methods, 
 
 io has two methods, on and emit
-it recieves an event with "on"
-and it sends through "emit"
+it recieves an event with "on", send arg is function to perform
+and it sends through "emit", second arg is just value
 
 creating the client event from frontend, we need to make use of cdn link of socket
 and here we create a socket variable that connects with the backend socket's URL.
@@ -22,3 +22,5 @@ io.on sends an event-> "connection", which client recieves again with the same e
 
 from frontend basic-> an event is gonna be emitted as "chatMessage" here, which will be recieved by backend with the same event name.
 
+socket.broadcast.emit sends the events to all the clients connected except self
+io.emit sends to all 

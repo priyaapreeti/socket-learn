@@ -19,7 +19,8 @@
     <script>
         const socket = io.connect("http://localhost:3000");
         socket.on("connect", () => console.log("connected to server"));
-
+        const user=prompt("Enter user name: ");
+        socket.emit("sendingName",user);
         const btn = document.getElementById("btn");
 
         btn.addEventListener("click", () => {
@@ -35,7 +36,7 @@
             console.log(msg);
             const messages = document.getElementById("messages");
             const p = document.createElement('p');
-            p.textContent=msg;
+            p.textContent=msg.user+": "+msg.message;
             messages.appendChild(p);
         });
     </script>

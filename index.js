@@ -13,14 +13,22 @@ const io = new Server(serve, {
 io.on("connection", (socket) => {
   console.log("User Connected");
   console.log(socket.id);
+  socket.on("sendingName",(data)=>{
+    socket.user= data;
+  })
   socket.on("disconnet", () => {
     console.log("user disconnected!");
   });
 
   //recieved from "chatMessage" event
   socket.on("chatMessage", (msg) => {
-    console.log("chat msg:", msg);
-    socket.broadcast.emit("broadcastMsg", msg); // now again sending to fE
+    let userData={
+        user: socket.user,
+        message: msg
+    }
+    console.log("chat msg:", userData);
+    io.emit("broadcastMsg",userData); //sends to self and others
+    // socket.broadcast.emit("broadcastMsg", msg); // now again sending to fE, except self
   });
 });
 
