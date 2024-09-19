@@ -8,11 +8,35 @@
 </head>
 
 <body>
+    <div class="chat-container">
+        <h1>Welcome to Chat Room</h1>
+        <input type="text" name="" id="ip">
+        <button id="btn">enter</button>
+        <div id="messages"></div>
+    </div>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.5/socket.io.js"></script> -->
     <script src="http://localhost:3000/socket.io/socket.io.js"></script>
     <script>
         const socket = io.connect("http://localhost:3000");
-        socket.on("connect", () => console.log("connected to server"))
+        socket.on("connect", () => console.log("connected to server"));
+
+        const btn = document.getElementById("btn");
+
+        btn.addEventListener("click", () => {
+            const ip = document.getElementById("ip");
+            const msg = ip.value;
+            //send this msg to server emit
+            socket.emit("chatMessage", msg); //custom event name, with direct msg sent
+            ip.value = "";
+        })
+
+        socket.on('broadcastMsg', (msg) => {
+            console.log(msg);
+            const messages = document.getElementById("messages");
+            const p = document.createElement('p');
+            p.textContent=msg;
+            messages.appendChild(p);
+        });
     </script>
 </body>
 

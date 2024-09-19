@@ -13,7 +13,13 @@ const io = new Server(serve, {
 io.on("connection", (socket) => {
   console.log("User Connected");
   console.log(socket.id);
-  socket.on("disconnet",()=>{console.log("user disconnected!")})
+  socket.on("disconnet", () => {
+    console.log("user disconnected!");
+  });
+  socket.on("chatMessage", (msg) => {
+    console.log("chat msg:", msg);
+    socket.broadcast.emit("broadcastMsg", msg);
+  });
 });
 
 serve.listen(3000, () => console.log("Listening on 3000"));
